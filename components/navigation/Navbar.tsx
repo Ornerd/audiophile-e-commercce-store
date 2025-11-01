@@ -2,6 +2,7 @@ import Image from "next/image"
 import navLogo from "@/public/audiophile 2.svg"
 import NavLink from "./NavLink"
 import Cart from "../buttons/Cart"
+import Link from "next/link"
 
 
 const Navbar = () => {
@@ -17,7 +18,9 @@ const Navbar = () => {
                         <span className="w-4 h-0.75 bg-white"></span>
                         <span className="w-4 h-0.75 bg-white"></span>
                     </div>
-                    <Image src={navLogo} alt='logo'/>
+                    <Link href={'/'}>
+                        <Image src={navLogo} alt='logo'/>
+                    </Link>
                      <Cart
                       extraClass={'md:hidden inline'}
                       />
@@ -29,15 +32,15 @@ const Navbar = () => {
                     linkName={'home'}
                     />
                     <NavLink
-                    linkTo={'/'}
+                    linkTo={'/category/headphones'}
                     linkName={'headphones'}
                     />
                     <NavLink
-                    linkTo={'/'}
+                    linkTo={'/category/speakers'}
                     linkName={'speakers'}
                     />
                     <NavLink
-                    linkTo={'/'}
+                    linkTo={'/category/earphones'}
                     linkName={'earphones'}
                     />
                 </div>

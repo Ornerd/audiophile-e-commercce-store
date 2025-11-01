@@ -1,7 +1,5 @@
 import ButtonOne from "@/components/buttons/ButtonOne";
-import ButtonThree from "@/components/buttons/ButtonThree";
 import ButtonTwo from "@/components/buttons/ButtonTwo";
-import Navbar from "@/components/navigation/Navbar";
 import Image from "next/image";
 import HeroImage from "@/public/img/hero-bg-piece.png"
 import CategoriesGroup from "@/components/groups/CategoriesGroup";
@@ -108,8 +106,6 @@ export default function Home() {
       <section className="lg:mt-50 md:my-24 my-30 mb-[133px] md:px-8 px-6">
         <AudiophileDesc/>
       </section>
-
-      <Footer/>
 
     </main>
   );

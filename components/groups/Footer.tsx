@@ -2,13 +2,16 @@ import React from 'react'
 import NavLink from '../navigation/NavLink'
 import Image from 'next/image'
 import navLogo from "@/public/audiophile 2.svg"
+import Link from 'next/link'
 
 const Footer = () => {
   return (
     <footer className='bg-[#101010] md:px-8 px-6'>
         <div className='content-wrapper relative md:pt-[75px] pt-13 pb-12'>
             <nav className='flex lg:justify-between flex-col items-center md:items-start lg:flex-row gap-12 md:gap-8 lg:gap-0'>
-                <Image src={navLogo} alt='logo'/>
+                  <Link href={'/'}>
+                        <Image src={navLogo} alt='logo'/>
+                  </Link>
                 <div>
                     <div className="flex gap-8.5 flex-col md:flex-row text-center md:text-left">
                         <NavLink
@@ -16,15 +19,15 @@ const Footer = () => {
                         linkName={'home'}
                         />
                         <NavLink
-                        linkTo={'/'}
+                        linkTo={'/category/headphones'}
                         linkName={'headphones'}
                         />
                         <NavLink
-                        linkTo={'/'}
+                        linkTo={'/category/speakers'}
                         linkName={'speakers'}
                         />
                         <NavLink
-                        linkTo={'/'}
+                        linkTo={'/category/earphones'}
                         linkName={'earphones'}
                         />
                     </div>
