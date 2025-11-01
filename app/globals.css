@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+* {
+  font-family: 'manrope', sans-serif;
+}
+ 
+@media screen and (min-width: 1441px) {
+  .content-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1440px;
+  }
+}
+
+nav.top-menu {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+p {
+  font-size: 0.9375rem; /*15px*/
+  line-height: 166%;
+  font-weight: 400;
+}
+
+.bottom-shadow {
+  /* Oval Copy 4 */
+/* position: absolute;
+left: 32.43%;
+right: 32.71%;
+top: 51.06%;
+bottom: 42.61%; */
+width: 122px;
+height: 18px;
+background: #000000;
+filter: blur(21.7463px);
+
+}
+
+@media screen and (min-width: 1024px) {
+  .content-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1110px;
+  }
+}
