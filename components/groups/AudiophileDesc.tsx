@@ -1,6 +1,6 @@
-import manImgDesktop from '@/assets/shared/desktop/image-best-gear.jpg'
-import manImgTablet from '@/assets/shared/tablet/image-best-gear.jpg'
-import manImgMobile from '@/assets/shared/mobile/image-best-gear.jpg'
+import manImgDesktop from '@/public/assets/shared/desktop/image-best-gear.jpg'
+import manImgTablet from '@/public/assets/shared/tablet/image-best-gear.jpg'
+import manImgMobile from '@/public/assets/shared/mobile/image-best-gear.jpg'
 
 const AudiophileDesc = () => {
   return (

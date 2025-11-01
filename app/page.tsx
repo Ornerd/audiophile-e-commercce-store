@@ -4,12 +4,12 @@ import Image from "next/image";
 import HeroImage from "@/public/img/hero-bg-piece.png"
 import CategoriesGroup from "@/components/groups/CategoriesGroup";
 import ButtonFour from "@/components/buttons/ButtonFour";
-import speakerSetDesktop from "@/assets/home/desktop/image-speaker-zx7.jpg"
-import speakerSetTablet from "@/assets/home/tablet/image-speaker-zx7.jpg"
-import speakerSetMobile from "@/assets/home/mobile/image-speaker-zx7.jpg"
-import earphoneDesktop from "@/assets/home/desktop/image-earphones-yx1.jpg"
-import earphoneTablet from "@/assets/home/tablet/image-earphones-yx1.jpg"
-import earphoneMobile from "@/assets/home/mobile/image-earphones-yx1.jpg"
+import speakerSetDesktop from "@/public/assets/home/desktop/image-speaker-zx7.jpg"
+import speakerSetTablet from "@/public/assets/home/tablet/image-speaker-zx7.jpg"
+import speakerSetMobile from "@/public/assets/home/mobile/image-speaker-zx7.jpg"
+import earphoneDesktop from "@/public/assets/home/desktop/image-earphones-yx1.jpg"
+import earphoneTablet from "@/public/assets/home/tablet/image-earphones-yx1.jpg"
+import earphoneMobile from "@/public/assets/home/mobile/image-earphones-yx1.jpg"
 import AudiophileDesc from "@/components/groups/AudiophileDesc";
 import Footer from "@/components/groups/Footer";
 
