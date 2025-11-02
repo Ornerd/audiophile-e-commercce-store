@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={`w-full ${isMobileMenuOpen ? 'bg-black fixed' : 'bg-transparent absolute'} px-8 z-500 ${pathName === '/' && !isMobileMenuOpen ? 'bg-transparent' : 'bg-black'}`}>
+      <div className={`w-full ${isMobileMenuOpen ? 'bg-black fixed' : 'absolute'} px-8 z-500 ${pathName === '/' && !isMobileMenuOpen ? 'bg-transparent' : 'bg-black'}`}>
         <div className="content-wrapper">
           <nav className='py-8 flex items-center justify-between top-menu'>
             <div className="flex items-center md:justify-left justify-between md:gap-10.5 w-full md:w-fit cursor-pointer">

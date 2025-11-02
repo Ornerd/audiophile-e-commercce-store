@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import ButtonOne from '@/components/buttons/ButtonOne'
+import { useCart } from '@/contexts/CartContext'
+import { useToast } from '@/contexts/ToastCtx'
 
 interface AddToCartFormProps {
   product: {
@@ -19,6 +21,8 @@ interface AddToCartFormProps {
 
 const AddToCart = ({ product }: AddToCartFormProps) => {
   const [quantity, setQuantity] = useState(1)
+  const { addToCart } = useCart()
+  const { showToast } = useToast() // Get showToast from ToastContext
 
   const handleDecrease = () => {
     if (quantity > 1) {
@@ -41,20 +45,24 @@ const AddToCart = ({ product }: AddToCartFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
+     console.log('🎯 AddToCartForm SUBMITTED!', {
+    product: product.name,
+    quantity: quantity
+  })
     // Here you'll add the cart logic later
-    const cartItem = {
-      productId: product.id,
+    addToCart({
+      id: product.id,
       slug: product.slug,
       name: product.name,
       price: product.price,
       image: product.image.desktop,
-      quantity: quantity
-    }
+    }, quantity)
     
-    console.log('Adding to cart:', cartItem)
-    // TODO: Add to cart state/context/localStorage
-    // TODO: Show success message
+    // Show toast notification
+    showToast(`${product.name} added to cart!`, 'success')
+
+     // Reset quantity to 1 after adding to cart
+    setQuantity(1)
   }
 
   return (

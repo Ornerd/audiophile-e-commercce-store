@@ -73,10 +73,11 @@ const Category = async ({ params }: { params: Promise<{ categoryName: string }> 
                       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-[1px] md:tracking-[1.43px] lg:tracking-[2px] mb-6 md:mb-8">
                         {product.name}
                       </h2>
-                      <p className="text-black opacity-50 mb-6 md:mb-10 max-w-md mx-auto lg:mx-0">
+                      <p className="text-black opacity-50 mb-6 md:mb-10 max-w-md md:max-w-[572px] mx-auto lg:mx-0">
                         {product.description}
                       </p>
                       <ButtonOne
+                      buttonText='see product'
                       linkTo={`/category/${categoryName}/${product.slug}`}/>
                     </div>
                   </div>
