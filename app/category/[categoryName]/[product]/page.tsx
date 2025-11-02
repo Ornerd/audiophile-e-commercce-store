@@ -1,4 +1,6 @@
 import ButtonOne from "@/components/buttons/ButtonOne"
+import AddToCart from "@/components/forms/AddtoCart"
+import AddToCartForm from "@/components/forms/AddtoCart"
 import AudiophileDesc from "@/components/groups/AudiophileDesc"
 import CategoriesGroup from "@/components/groups/CategoriesGroup"
 import productsData from '@/public/assets/db.json'
@@ -80,17 +82,8 @@ const Page = async ({ params }: { params: Promise<{ categoryName: string; produc
                         </h4>
                         
                         {/* small form containing number to add to cart, side by side an add to cart button */}
-                        <div className="flex gap-4">
-                          <div className="flex items-center bg-gray-100 px-4 py-3">
-                            <button className="px-2 text-black opacity-25 hover:text-[#D87D4A] hover:opacity-100 transition-colors">-</button>
-                            <span className="px-6 font-bold">1</span>
-                            <button className="px-2 text-black opacity-25 hover:text-[#D87D4A] hover:opacity-100 transition-colors">+</button>
-                          </div>
-                          <ButtonOne
-                            buttonText="add to cart"
-                            linkTo="/"
-                          />
-                        </div>
+                        <AddToCart
+                        product={product}/>
                     </div>
                 </div>
             </div>
