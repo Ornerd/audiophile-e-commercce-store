@@ -35,7 +35,8 @@ const Page = async ({ params }: { params: Promise<{ categoryName: string; produc
 
   return (
     <main>
-        <header className="bg-black min-h-[97px]"></header>
+        {/* just added the header below because the section below somehow dragged down the navbar with it. */}
+        <header className="min-h-[97px]"></header> 
         
         <section className="mt-16 md:mt-24 lg:mt-36 px-6 md:px-8">
             <div className="content-wrapper">

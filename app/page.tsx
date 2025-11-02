@@ -28,7 +28,10 @@ export default function Home() {
               Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.
             </p>
 
-            <ButtonOne/>
+            <ButtonOne
+            buttonText="see product"
+            linkTo="/category/headphones/xx99-mark-two-headphones"
+            />
           </div>
 
             <div className="absolute lg:top-0 -top-6 lg:-right-16 lg:w-[708.8px] w-auto lg:h-full h-[110%] z-1 opacity-50 lg:opacity-100">
@@ -54,7 +57,10 @@ export default function Home() {
                 Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
               </p>
 
-              <ButtonFour/>
+              <ButtonFour
+              buttonText="see product"
+              linkTo="/category/speakers/zx9-speaker"
+              />
             </div>
 
             {/* circles */}
@@ -77,7 +83,10 @@ export default function Home() {
               <h2 className="mb-8 font-bold text-[1.75rem] tracking-[2px]">
                 ZX7 SPEAKER
               </h2>
-              <ButtonTwo/>
+              <ButtonTwo
+              buttonText= 'see product'
+              linkTo='/category/speakers/zx7-speaker'
+              />
             </div>
           </div>
           
@@ -98,7 +107,10 @@ export default function Home() {
               <h2 className="mb-8 font-bold text-[1.75rem] tracking-[2px]">
                 YX1 EARPHONES
               </h2>
-              <ButtonTwo/>
+              <ButtonTwo
+              buttonText="see product"
+              linkTo="/category/earphones/yx1-earphones"
+              />
           </div>
         </div>
       </section>
