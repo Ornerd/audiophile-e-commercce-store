@@ -2,9 +2,18 @@ import AudiophileDesc from '@/components/groups/AudiophileDesc'
 import CategoriesGroup from '@/components/groups/CategoriesGroup'
 import productsData from '@/public/assets/db.json'
 import ButtonOne from '@/components/buttons/ButtonOne'
+import { notFound } from 'next/navigation' // prevention against invalid entries to my url
+
+
 
 // Import or read your db.json data
 const getProductsByCategory = async (categoryName: string) => {
+  const validCategories = ['headphones', 'speakers', 'earphones']
+  
+  // Check if category is valid first
+  if (!validCategories.includes(categoryName.toLowerCase())) {
+    return null
+  }
   return productsData.data.filter(product => 
     product.category.toLowerCase() === categoryName.toLowerCase())
     .sort((a, b) => {
@@ -19,6 +28,11 @@ const Category = async ({ params }: { params: Promise<{ categoryName: string }> 
   const categoryName = (await params).categoryName
   const products = await getProductsByCategory(categoryName)
 
+  // If no products found (invalid category), show 404
+  if (products === null || products.length === 0) {
+    notFound()
+  }
+
   return (
     <main>
         <header className='bg-black flex justify-center pt-[195px] pb-[97px]'>
@@ -29,7 +43,7 @@ const Category = async ({ params }: { params: Promise<{ categoryName: string }> 
           <div className='content-wrapper'>
               {/* products in product category goes here */}
               <div className="grid grid-cols-1 gap-32 md:gap-40 mt-32 md:mt-40 px-6 md:px-8">
-                {products.map((product, index) => (
+                {products && products.map((product, index) => (
                   <div 
                     key={product.id} 
                     className={`flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-32 ${
@@ -63,7 +77,7 @@ const Category = async ({ params }: { params: Promise<{ categoryName: string }> 
                         {product.description}
                       </p>
                       <ButtonOne
-                      linkTo={`/products/${product.slug}`}/>
+                      linkTo={`/category/${categoryName}/${product.slug}`}/>
                     </div>
                   </div>
                 ))}
