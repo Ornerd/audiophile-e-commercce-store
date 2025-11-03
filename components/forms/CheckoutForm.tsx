@@ -118,14 +118,14 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
   }
 
   return (
-    <div className="bg-white rounded-lg p-6 md:p-8">
-      <h2 className="text-2xl font-bold mb-8">Checkout</h2>
+    <div className="bg-white rounded-lg p-6 md:px-12 md:py-13.5">
+      <h2 className="text-2xl font-bold mb-8 uppercase">Checkout</h2>
       
       <form noValidate id="checkout-form" onSubmit={handleSubmit} className="space-y-8">
         {/* Billing Details Section */}
         <section>
           <h3 className="text-lg font-bold text-[#D87D4A] mb-6">Billing Details</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6">
             {/* Name */}
             <div>
               <label htmlFor="name" className={`flex items-center justify-between text-xs font-bold mb-2 ${errors.name ? 'text-[#CD2C2C]' : 'text-black'}`}>
@@ -212,13 +212,13 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
                 value={formData.address}
                 onChange={handleChange}
                 placeholder="1137 Williams Avenue"
-                className={`w-full p-4.5 border rounded-lg focus:outline-none focus:border-[#D87D4A] ${
+                className={`w-full p-4.5 mb-6 border rounded-lg focus:outline-none focus:border-[#D87D4A] ${
                   errors.address ? 'border-[#CD2C2C] border-2' : 'border-[#CFCFCF]'
                 }`}
               />
             </div>
             
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6">
               {/* ZIP Code */}
               <div>
                 <label htmlFor="zipCode" className={`flex items-center justify-between text-xs font-bold mb-2 ${errors.zipCode ? 'text-[#CD2C2C]' : 'text-black'}`}>
@@ -288,7 +288,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
         {/* Payment Details Section */}
         <section>
           <h3 className="text-lg font-bold text-[#D87D4A] mb-6">Payment Details</h3>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {/* Payment Method */}
             <div className="flex flex-col md:flex-row md:items-start gap-4">
 
@@ -296,7 +296,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
                 Payment Method
               </label>
 
-              <div className="md:w-2/3 space-y-2">
+              <div className="md:w-2/3 space-y-6">
                 {/* e-Money Option */}
                 <label className="flex items-center p-4.5 border border-[#D87D4A] rounded-lg cursor-pointer text-sm font-bold">
                   <input

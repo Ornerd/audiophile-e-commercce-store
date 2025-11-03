@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import CheckoutForm from '@/components/forms/CheckoutForm'
 import OrderSummary from '@/components/groups/OrderSummary'
+import Link from 'next/link'
 
 export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -17,10 +18,10 @@ export default function CheckoutPage() {
 
   return (
     <main className="bg-gray-100 min-h-screen">
-      <div className="content-wrapper mx-auto px-4 py-8">
+      <div className="content-wrapper mx-auto px-4  py-35.5">
         {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold">Checkout</h1>
+        <header className="mb-9 text-[#D87D4A]">
+          <Link href={'/'}>Go Back</Link>
         </header>
 
         {/* Main Content - Two Columns */}

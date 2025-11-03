@@ -46,6 +46,12 @@ input[type="radio"] {
   border: 1px solid #D87D4A;
 }
 
+#checkout-form h3 {
+  text-transform: uppercase;
+  margin-top: 4rem;
+  font-size: 0.8125rem
+}
+
 .bottom-shadow {
   /* Oval Copy 4 */
 /* position: absolute;
