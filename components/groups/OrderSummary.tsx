@@ -79,7 +79,7 @@ export default function OrderSummary({ onCheckout, isSubmitting = false }: Order
         disabled={isSubmitting || cartItems.length === 0}
         className="w-full bg-[#D87D4A] text-white py-4 px-6 rounded-lg font-bold uppercase tracking-wider hover:bg-[#FBAF85] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? 'Processing...' : 'Continue & Pay'}
+        {isSubmitting ? 'Processing...' : 'Continue'}
       </button>
     </div>
   )
