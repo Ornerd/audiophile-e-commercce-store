@@ -37,6 +37,15 @@ p {
   font-weight: 400;
 }
 
+input[type="text"]{
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+input[type="radio"] {
+  border: 1px solid #D87D4A;
+}
+
 .bottom-shadow {
   /* Oval Copy 4 */
 /* position: absolute;
