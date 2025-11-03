@@ -142,7 +142,7 @@ const Cart = ({ extraClass }: CartProps) => {
 
               <div className="space-y-3">
                 <Link 
-                  href="/"
+                  href="/checkout"
                   onClick={toggleModal}
                   className="block w-full bg-[#D87D4A] text-white text-center py-3 px-6 font-bold uppercase tracking-wider hover:bg-[#FBAF85] text-[0.8125rem] transition-colors"
                 >
