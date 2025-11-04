@@ -5,6 +5,7 @@ import { useState } from 'react'
 interface CheckoutFormProps {
   onSubmit: (formData: any) => void
   isSubmitting?: boolean
+   onValidationChange?: (hasErrors: boolean) => void
 }
 
 interface FormData {
@@ -33,7 +34,7 @@ interface FormErrors {
   emoneyPin?: string
 }
 
-export default function CheckoutForm({ onSubmit, isSubmitting = false }: CheckoutFormProps) {
+export default function CheckoutForm({ onSubmit, isSubmitting = false, onValidationChange }: CheckoutFormProps) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -44,7 +45,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
     country: '',
     paymentMethod: 'emoney',
     emoneyNumber: '',
-    emoneyPin: ''
+    emoneyPin: '',
   })
 
   const [errors, setErrors] = useState<FormErrors>({})
@@ -55,14 +56,23 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
       ...prev,
       [name]: value
     }))
+  
     // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,
         [name]: ''
       }))
+      
+      // Notify parent that errors might have changed
+      if (onValidationChange) {
+        const hasRemainingErrors = Object.keys({ ...errors, [name]: '' }).some(
+          key => key !== name && errors[key as keyof FormErrors]
+        )
+        onValidationChange(hasRemainingErrors)
+      }
     }
-  }
+}
 
   const handlePaymentMethodChange = (method: 'emoney' | 'cash') => {
     setFormData(prev => ({
@@ -83,7 +93,7 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
 
     // Billing Details Validation
     if (!formData.name.trim()) newErrors.name = 'Name is required'
-    else if (formData.name.trim() && !/^[a-zA-Z0-9]+$/.test(formData.name)) newErrors.name = "No special characters allowed"
+    // else if (formData.name.trim() && !/^[a-zA-Z0-9]+$/.test(formData.name)) newErrors.name = "No special characters allowed"
     if (!formData.email.trim()) newErrors.email = 'Email is required'
     else if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Wrong format'
    
@@ -105,8 +115,23 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
       else if (!/^[0-9]{4}$/.test(formData.emoneyPin)) newErrors.emoneyPin = 'Must be 4 digits'
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+   interface CheckoutFormProps {
+  onSubmit: (formData: any) => void
+  isSubmitting?: boolean
+  onValidationChange?: (hasErrors: boolean) => void
+}
+
+   setErrors(newErrors)
+  
+  // Call the validation change callback if provided
+  const hasErrors = Object.keys(newErrors).length > 0
+  if (onValidationChange) {
+    onValidationChange(hasErrors)
+  }
+  
+  return !hasErrors
+
+    
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -116,6 +141,8 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false }: Checkou
       onSubmit(formData)
     }
   }
+
+  
 
   return (
     <div className="bg-white rounded-lg p-6 md:px-12 md:py-13.5">
