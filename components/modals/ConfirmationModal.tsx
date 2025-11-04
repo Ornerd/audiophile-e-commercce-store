@@ -51,9 +51,9 @@ export default function ConfirmationModal({ orderData, onClose }: ConfirmationMo
             </div>
 
             {/* Order Summary */}
-            <div className="bg-gray-50 rounded-lg p-6 mb-6 flex">
+            <div className="bg-gray-50 rounded-lg mb-6 flex overflow-hidden">
 
-              <div className='w-full'>
+              <div className='w-full p-6'>
                   {/* Order Items */}
                   {items.length > 0 && (
                       <div className=" pt-4 mb-4">
@@ -81,22 +81,10 @@ export default function ConfirmationModal({ orderData, onClose }: ConfirmationMo
                   </div>
               </div>
 
-              <div className="pt-4 space-y-2 w-full">
-                <div className="flex justify-between">
-                  <span>Subtotal:</span>
-                  <span>${subtotal.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Shipping:</span>
-                  <span>${shipping.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>VAT:</span>
-                  <span>${vat.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2">
+              <div className="p-6 w-full bg-black">
+                <div className="space-y-2 justify-between font-bold text-lg pt-2 mt-2 text-white">
                   <span>Grand Total:</span>
-                  <span className="text-[#D87D4A]">${grandTotal.toLocaleString()}</span>
+                  <span className="text-white">${grandTotal.toLocaleString()}</span>
                 </div>
               </div>
             </div>

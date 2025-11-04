@@ -183,7 +183,7 @@ export async function POST(request: Request) {
     // Send email using Nodemailer
     const emailResult = await sendEmail({
       to: body.customerEmail,
-      subject: `Order Confirmation #${body.orderNumber}`,
+      subject: `Order #${body.orderNumber} Confirmed`,
       html: emailHTML,
     })
 
