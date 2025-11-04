@@ -5,7 +5,7 @@ import ButtonThree from '../buttons/ButtonThree'
 import Link from 'next/link';
 
 
-const Category = ({src, alt, categoryName, onClick}: { src: string; alt: string; categoryName: string; onClick: () => void}) => {
+const Category = ({src, alt, categoryName}: { src: string; alt: string; categoryName: string}) => {
  
   const pathName: string = usePathname() 
  
@@ -19,7 +19,6 @@ const Category = ({src, alt, categoryName, onClick}: { src: string; alt: string;
             <div className='flex flex-col items-center gap-3.75'>
               <h3 className='uppercase font-bold tracking-[1.29px] select-none'>{categoryName}</h3>
               <ButtonThree
-                onClick={onClick}
               />
             </div>
         </div>

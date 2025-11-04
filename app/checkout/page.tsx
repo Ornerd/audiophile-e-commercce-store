@@ -4,20 +4,35 @@ import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { useCart } from '@/contexts/CartContext'
 import { useToast } from '@/contexts/ToastCtx'
-import { useRouter } from 'next/navigation'
 import CheckoutForm from '@/components/forms/CheckoutForm'
 import OrderSummary from '@/components/groups/OrderSummary'
 import Link from 'next/link'
+import ConfirmationModal from '@/components/modals/ConfirmationModal' // We'll create this
+
+interface OrderData {
+  orderNumber: string
+  orderId: string
+  subtotal: number
+  shipping: number
+  vat: number
+  grandTotal: number
+  items: Array<{
+    name: string
+    price: number
+    quantity: number
+  }>
+}
 
 export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [hasFormErrors, setHasFormErrors] = useState(false)
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [orderData, setOrderData] = useState<OrderData | null>(null)
   
   // Convex integration
   const createOrder = useMutation(api.orders.createOrder)
   const { cartItems, getCartTotal, clearCart } = useCart()
   const { showToast } = useToast()
-  const router = useRouter()
 
   const handleFormValidation = (hasErrors: boolean) => {
     setHasFormErrors(hasErrors)
@@ -33,22 +48,8 @@ export default function CheckoutPage() {
       const vat = Math.round(subtotal * 0.2)
       const grandTotal = subtotal + shipping + vat
 
-      // Save order data to localStorage BEFORE clearing cart
-      const orderDataToSave = {
-        subtotal,
-        shipping,
-        vat,
-        grandTotal,
-        items: cartItems.map(item => ({
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        }))
-      }
-      localStorage.setItem('lastOrderData', JSON.stringify(orderDataToSave))
-
       // Prepare order data for Convex
-      const orderData = {
+      const orderDataForConvex = {
         customerName: formData.name,           
         customerEmail: formData.email,           
         customerPhone: formData.phone,       
@@ -73,10 +74,10 @@ export default function CheckoutPage() {
       }
 
       // Create order in Convex
-      const result = await createOrder(orderData)
+      const result = await createOrder(orderDataForConvex)
 
-      // Send confirmation email - FIXED PATH
-      const emailResponse = await fetch('/api/send-order-email', { 
+      // Send confirmation email
+      const emailResponse = await fetch('/api/send-order-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,20 +106,32 @@ export default function CheckoutPage() {
 
       const emailResult = await emailResponse.json()
 
-      // SINGLE toast message - REMOVED DUPLICATE
       if (emailResult.success) {
         showToast(`Order #${result.orderNumber} confirmed! Check your email.`, 'success')
       } else {
         showToast(`Order #${result.orderNumber} confirmed! (Email failed to send)`, 'info')
       }
       
+      // Set order data for confirmation modal
+      setOrderData({
+        orderNumber: result.orderNumber,
+        orderId: result.orderId,
+        subtotal,
+        shipping,
+        vat,
+        grandTotal,
+        items: cartItems.map(item => ({
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        }))
+      })
+      
       // Clear cart
       clearCart()
       
-      // Redirect to confirmation page
-      setTimeout(() => {
-        router.push(`/confirmation?orderId=${result.orderId}&orderNumber=${result.orderNumber}`)
-      }, 1500)
+      // Show confirmation modal instead of redirecting
+      setShowConfirmation(true)
       
     } catch (error) {
       console.error('Checkout failed:', error)
@@ -128,14 +141,22 @@ export default function CheckoutPage() {
     }
   }
 
+  const handleCloseConfirmation = () => {
+    setShowConfirmation(false)
+    setOrderData(null)
+  }
+
   return (
     <main className="bg-gray-100 min-h-screen">
       <div className="content-wrapper mx-auto px-4 py-35.5">
+        {/* Header */}
         <header className="mb-9 text-[#D87D4A]">
           <Link href={'/'}>Go Back</Link>
         </header>
 
+        {/* Main Content - Two Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Checkout Form */}
           <div className="lg:col-span-2">
             <CheckoutForm 
               onSubmit={handleCheckout}
@@ -144,6 +165,7 @@ export default function CheckoutPage() {
             />
           </div>
 
+          {/* Right Column - Order Summary */}
           <div className="lg:col-span-1">
             <OrderSummary 
               onCheckout={() => {}}
@@ -152,6 +174,14 @@ export default function CheckoutPage() {
             />
           </div>
         </div>
+
+        {/* Confirmation Modal */}
+        {showConfirmation && orderData && (
+          <ConfirmationModal 
+            orderData={orderData}
+            onClose={handleCloseConfirmation}
+          />
+        )}
       </div>
     </main>
   )
