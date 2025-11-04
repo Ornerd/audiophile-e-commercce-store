@@ -144,7 +144,7 @@ const Cart = ({ extraClass }: CartProps) => {
                 <Link 
                   href="/checkout"
                   onClick={toggleModal}
-                  className="block w-full bg-[#D87D4A] text-white text-center py-3 px-6 font-bold uppercase tracking-wider hover:bg-[#FBAF85] text-[0.8125rem] transition-colors"
+                  className={`block w-full bg-[#D87D4A] text-white text-center py-3 px-6 font-bold uppercase tracking-wider hover:bg-[#FBAF85] text-[0.8125rem] transition-colors ${itemCount < 1? 'pointer-events-none opacity-50' : ''}`}
                 >
                   Checkout
                 </Link>
