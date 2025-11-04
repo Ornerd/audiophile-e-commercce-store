@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react'
 import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
@@ -20,7 +19,6 @@ export default function CheckoutPage() {
   const { showToast } = useToast()
   const router = useRouter()
 
-  // Add the missing function
   const handleFormValidation = (hasErrors: boolean) => {
     setHasFormErrors(hasErrors)
   }
@@ -36,18 +34,18 @@ export default function CheckoutPage() {
       const grandTotal = subtotal + shipping + vat
 
       // Save order data to localStorage BEFORE clearing cart
-    const orderDataToSave = {
-      subtotal,
-      shipping,
-      vat,
-      grandTotal,
-      items: cartItems.map(item => ({
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-      }))
-    }
-    localStorage.setItem('lastOrderData', JSON.stringify(orderDataToSave))
+      const orderDataToSave = {
+        subtotal,
+        shipping,
+        vat,
+        grandTotal,
+        items: cartItems.map(item => ({
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        }))
+      }
+      localStorage.setItem('lastOrderData', JSON.stringify(orderDataToSave))
 
       // Prepare order data for Convex
       const orderData = {
@@ -58,11 +56,9 @@ export default function CheckoutPage() {
         shippingZipCode: formData.zipCode,     
         shippingCity: formData.city,           
         shippingCountry: formData.country,     
-        
         paymentMethod: formData.paymentMethod,
         emoneyNumber: formData.emoneyNumber,
         emoneyPin: formData.emoneyPin,
-
         items: cartItems.map(item => ({
           productId: item.id,
           name: item.name,
@@ -78,9 +74,43 @@ export default function CheckoutPage() {
 
       // Create order in Convex
       const result = await createOrder(orderData)
-      
-      // Show success message
-      showToast(`Order #${result.orderNumber} confirmed!`, 'success')
+
+      // Send confirmation email - FIXED PATH
+      const emailResponse = await fetch('/api/send-order-email', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderNumber: result.orderNumber,
+          customerName: formData.name,
+          customerEmail: formData.email,
+          items: cartItems.map(item => ({
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+          subtotal,
+          shipping,
+          vat,
+          grandTotal,
+          shippingAddress: {
+            address: formData.address,
+            city: formData.city,
+            zipCode: formData.zipCode,
+            country: formData.country,
+          },
+        }),
+      })
+
+      const emailResult = await emailResponse.json()
+
+      // SINGLE toast message - REMOVED DUPLICATE
+      if (emailResult.success) {
+        showToast(`Order #${result.orderNumber} confirmed! Check your email.`, 'success')
+      } else {
+        showToast(`Order #${result.orderNumber} confirmed! (Email failed to send)`, 'info')
+      }
       
       // Clear cart
       clearCart()
@@ -101,14 +131,11 @@ export default function CheckoutPage() {
   return (
     <main className="bg-gray-100 min-h-screen">
       <div className="content-wrapper mx-auto px-4 py-35.5">
-        {/* Header */}
         <header className="mb-9 text-[#D87D4A]">
           <Link href={'/'}>Go Back</Link>
         </header>
 
-        {/* Main Content - Two Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Checkout Form */}
           <div className="lg:col-span-2">
             <CheckoutForm 
               onSubmit={handleCheckout}
@@ -117,10 +144,9 @@ export default function CheckoutPage() {
             />
           </div>
 
-          {/* Right Column - Order Summary */}
           <div className="lg:col-span-1">
             <OrderSummary 
-              onCheckout={() => {}} // Form submission handled by button
+              onCheckout={() => {}}
               isSubmitting={isSubmitting}
               hasFormErrors={hasFormErrors}
             />

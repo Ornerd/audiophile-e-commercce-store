@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import cashIcon from '@/public/assets/checkout/icon-cash-on-delivery.svg'
+import Image from 'next/image'
 
 interface CheckoutFormProps {
   onSubmit: (formData: any) => void
@@ -402,9 +404,9 @@ export default function CheckoutForm({ onSubmit, isSubmitting = false, onValidat
 
             {/* Cash on Delivery Message */}
             {formData.paymentMethod === 'cash' && (
-              <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-lg">
-                <span className="text-4xl">💰</span>
-                <p className="text-gray-600 text-sm">
+              <div className="flex items-center gap-4 p-4 rounded-lg">
+                <span className="text-4xl w-12"><Image src={cashIcon} alt="cash on delivery icon" width={48} className='w-full'/></span>
+                <p className="text-black opacity-50 text-sm w-full max-w-[554px]">
                   The 'Cash on Delivery' option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.
                 </p>
               </div>

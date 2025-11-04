@@ -6,6 +6,7 @@ import Image from 'next/image'
 interface OrderSummaryProps {
   onCheckout: () => void
   isSubmitting?: boolean
+  hasFormErrors?: boolean
 }
 
 export default function OrderSummary({ onCheckout, isSubmitting = false }: OrderSummaryProps) {
