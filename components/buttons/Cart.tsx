@@ -80,7 +80,7 @@ const Cart = ({ extraClass }: CartProps) => {
               </div>
 
               {/* Cart Items */}
-              <div className="max-h-80 overflow-y-auto mb-6">
+              <div className="max-h-70 overflow-y-auto mb-6">
                 {cartItems.length === 0 ? (
                   <p className="text-center text-black opacity-50 py-8">
                     Your cart is empty
