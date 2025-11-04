@@ -1,8 +1,7 @@
 'use client'
-
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 // Create an interface for the order data
 interface OrderData {
@@ -17,7 +16,8 @@ interface OrderData {
   }>
 }
 
-export default function ConfirmationPage() {
+// Component that uses useSearchParams - wrapped in Suspense
+function ConfirmationContent() {
   const searchParams = useSearchParams()
   const [orderData, setOrderData] = useState<OrderData | null>(null)
   
@@ -115,5 +115,14 @@ export default function ConfirmationPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+// Main component with Suspense boundary
+export default function ConfirmationPage() {
+  return (
+    <Suspense fallback={<div className='block h-screen bg-gray-200'>Loading...</div>}>
+      <ConfirmationContent />
+    </Suspense>
   )
 }

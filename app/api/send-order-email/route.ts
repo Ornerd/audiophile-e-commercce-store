@@ -163,11 +163,11 @@ export async function POST(request: Request) {
       <!-- NEW CTA SECTION -->
       <div style="text-align: center; margin: 30px 0;">
         <p style="margin-bottom: 15px; font-size: 16px;">Want to check your order status or view order details?</p>
-        <a href="https://youraudiphilestore.com/confirmation?orderNumber=${body.orderNumber}" class="cta-button">
+        <a href="https://audiphilestore.com/confirmation?orderNumber=${body.orderNumber}" class="cta-button">
           View Your Order
         </a>
         <p style="font-size: 14px; color: #666; margin-top: 10px;">
-          Or copy this link:https://youraudiphilestore.com/confirmation?orderNumber=${body.orderNumber}
+          Or copy this link:https://audiphilestore.com/confirmation?orderNumber=${body.orderNumber}
         </p>
       </div>
     </div>

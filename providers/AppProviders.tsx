@@ -3,34 +3,29 @@
 import { CartProvider } from '@/contexts/CartContext'
 import { ToastProvider } from '@/contexts/ToastCtx'
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
-
-// Initialize Convex client with fallback for prerendering
-let convex: ConvexReactClient | null = null
-
-if (typeof window !== 'undefined') {
-  // Only create Convex client on the client side
-  convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!)
-}
+import { useEffect, useState } from 'react'
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
+  const [convexClient, setConvexClient] = useState<ConvexReactClient | null>(null)
+
+  useEffect(() => {
+    // This only runs on the client side after hydration
+    const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!)
+    setConvexClient(convex)
+  }, [])
+
   return (
-    <>
-      {convex ? (
-        <ConvexProvider client={convex}>
-          <ToastProvider>
-            <CartProvider>
-              {children}
-            </CartProvider>
-          </ToastProvider>
-        </ConvexProvider>
-      ) : (
-        // Fallback during prerendering
-        <ToastProvider>
-          <CartProvider>
+    <ToastProvider>
+      <CartProvider>
+        {convexClient ? (
+          <ConvexProvider client={convexClient}>
             {children}
-          </CartProvider>
-        </ToastProvider>
-      )}
-    </>
+          </ConvexProvider>
+        ) : (
+          // During SSR/prerendering, render children without Convex
+          children
+        )}
+      </CartProvider>
+    </ToastProvider>
   )
 }
