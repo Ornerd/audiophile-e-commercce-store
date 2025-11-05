@@ -40,7 +40,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       
       {/* Toast UI */}
       {toast && toast.isVisible && (
-        <div className="fixed top-4 right-4 z-1000 bg-[#D87D4A] text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in">
+        <div className="fixed top-4 right-4 w-9/10 md:w-fit z-1000 bg-[#D87D4A] text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in">
           <div className="flex items-center gap-3 uppercase font-bold">
             <span>{toast.message}</span>
             <button 

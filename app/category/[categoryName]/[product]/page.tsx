@@ -189,7 +189,7 @@ const Page = async ({ params }: { params: Promise<{ categoryName: string; produc
             </div>
         </section>
 
-        <div className='content-wrapper md:px-8 px-6 lg:mt-40 md:mt-32 mt-10'>
+        <div className='content-wrapper md:px-8 px-6 lg:mt-40 md:mt-32 mt-30'>
           <CategoriesGroup/>
         </div>
        

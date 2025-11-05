@@ -63,7 +63,7 @@ const Cart = ({ extraClass }: CartProps) => {
           />
           
           {/* Modal Content */}
-          <div className="fixed top-24 right-4 md:right-8 w-[377px] bg-white rounded-lg shadow-2xl z-50 animate-fade-in">
+          <div className="fixed top-30 right-4 md:right-8 md:w-[377px] w-9/10 bg-white rounded-lg shadow-2xl z-50 animate-fade-in">
             <div className="p-8">
               {/* Header */}
               <div className="flex justify-between items-center mb-8">

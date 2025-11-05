@@ -42,7 +42,7 @@ const Category = async ({ params }: { params: Promise<{ categoryName: string }> 
         <section>
           <div className='content-wrapper'>
               {/* products in product category goes here */}
-              <div className="grid grid-cols-1 gap-32 md:gap-40 mt-32 md:mt-40 px-6 md:px-8">
+              <div className="grid grid-cols-1 gap-32 md:gap-40 mt-30 md:mt-40 px-6 md:px-8">
                 {products && products.map((product, index) => (
                   <div 
                     key={product.id} 
@@ -86,7 +86,7 @@ const Category = async ({ params }: { params: Promise<{ categoryName: string }> 
           </div>
         </section>
 
-        <div className='content-wrapper md:px-8 px-6 lg:mt-40 md:mt-32 mt-10'>
+        <div className='content-wrapper md:px-8 px-6 lg:mt-40 md:mt-32 mt-30'>
           <CategoriesGroup/>
         </div>
        
