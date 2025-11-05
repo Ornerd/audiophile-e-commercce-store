@@ -37,7 +37,7 @@ export default function ConfirmationModal({ orderData, onClose }: ConfirmationMo
       >
         {/* Modal Content */}
         <div 
-          className="bg-white rounded-lg max-w-[540px] max-h-[90vh] overflow-y-auto"
+          className="bg-white rounded-lg w-9/10 max-w-[540px] max-h-[80vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="p-6 md:p-12">
@@ -61,11 +61,14 @@ export default function ConfirmationModal({ orderData, onClose }: ConfirmationMo
                           index === 0 ?
                           <div key={index} className="flex justify-between text-sm mb-1">
                             <div className='flex flex-col'>
-                              <span>{item.name}</span>
-                              <span>${(item.price * item.quantity).toLocaleString()}</span>
+
+                              <span className='font-bold uppercase text-[0.9375rem]'>{item.name.split(' ').filter(word => !["headphones", "speaker", "earphones", "wireless"].includes(word.toLowerCase())).join(' ')}</span>
+
+                              <span className='text-[0.875rem] font-bold opacity-50 text-black'>${(item.price * item.quantity).toLocaleString()}</span>
+
                             </div>
                             <div>
-                              <span>x{item.quantity}</span>
+                              <span className='text-[0.75rem] font-bold opacity-50 text-black'>x{item.quantity}</span>
                             </div>
                           
                           </div>
@@ -73,40 +76,26 @@ export default function ConfirmationModal({ orderData, onClose }: ConfirmationMo
                       ))}
                       </div>
                   )}
-                  <hr></hr>
-                  <div>
-                      {items.length > 0 && (
-                        <span> and {items.length - 1} others</span>
-                      )}
+                  <div className='bg-black opacity-10 w-full h-px'></div>
+                  <div className='flex justify-center mt-3'>
+                      <span className='text-[0.75rem] font-bold opacity-50 text-black'> and {items.length - 1} other item(s)</span>
                   </div>
               </div>
 
               <div className="p-6 w-full bg-black">
-                <div className="space-y-2 justify-between font-bold text-lg pt-2 mt-2 text-white">
-                  <span>Grand Total:</span>
-                  <span className="text-white">${grandTotal.toLocaleString()}</span>
+                <div className="flex flex-col gap-4 pt-2 mt-4 text-white">
+                  <h5 className='font-normal text-[0.9375rem] uppercase opacity-50'>Grand Total:</h5>
+                  <h4 className="text-white font-bold text-lg ">${grandTotal.toLocaleString()}</h4>
                 </div>
               </div>
             </div>
 
-            {/* Next Steps */}
-            <div className="text-center mb-6">
-              <p className="text-gray-600 mb-6">
-                You will receive an email confirmation shortly. We'll notify you when your order has shipped.
-              </p>
-            </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={onClose}
-                className="bg-black text-white py-3 px-8 rounded-lg font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors flex-1 text-center"
-              >
-                Continue Shopping
-              </button>
+            <div className="flex flex-col sm:flex-row gap-4 mt-11.5 justify-center">
               <Link 
                 href="/"
-                className="bg-[#D87D4A] text-white py-3 px-8 rounded-lg font-bold uppercase tracking-wider hover:bg-[#FBAF85] transition-colors flex-1 text-center"
+                className="bg-[#D87D4A] text-white py-3 px-8 font-bold uppercase tracking-wider hover:bg-[#FBAF85] transition-colors flex-1 text-center"
               >
                 Back to Home
               </Link>
