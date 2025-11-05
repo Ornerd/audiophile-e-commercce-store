@@ -51,7 +51,7 @@ export default function ConfirmationModal({ orderData, onClose }: ConfirmationMo
             </div>
 
             {/* Order Summary */}
-            <div className="bg-gray-50 rounded-lg mb-6 flex overflow-hidden">
+            <div className="bg-gray-50 rounded-lg mb-6 flex md:flex-row fkex-col overflow-hidden">
 
               <div className='w-full p-6'>
                   {/* Order Items */}
